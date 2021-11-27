@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 4vw;
+  }
+  
+  header {
+    display: flex;
+    flex: 1;  
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: larger;
+  }
+  
+  
+
+  .container {
+    max-width: 35vw;
+    margin: 3vw auto 0 auto;
+  }
+  
+  .container p {
+  
+    font-size: larger;
+    margin: 5px auto 0 auto;
+  
+  }
+  
+  button:hover {
+    background-color: #419c50;
+  }
+  
+  
+  /* button style*/
+  /*https://stackoverflow.com/questions/3540380/how-can-i-apply-css-on-all-buttons-which-are-present-in-that-page*/
+  button {
+    display: inline-block;
+    margin: .5vw;
+    color: #ffffff;
+    background-color: #34831c;
+    font-size: 100%;
+    border: 0;
+    border-radius: .5vw;
+    padding: .3vw 1vw;
+    cursor: pointer;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .questiontitle {
+    text-align: start;
+  }
+  .choices {
+    display: block;
+    margin: .5vw 0 0 0;
+    width: 33%;
+  }
+  
+  .start {
+    text-align: center;
+  }
+  
+  .choices button {
+    display: block;
+    width: 100%;
+    text-align: start;
+  }
+  
+  .hide {
+    display: none;
+    
+  }
+  .results {
+    border-top: 2px solid black;
+    opacity: .5;
+    font-style: italic;
+    font-size: larger;
+  }
+  li {
+    padding-bottom: 2px;
+  }
+  
+  ol {
+    background-color: rgba(136, 111, 173, .6);
+    margin: 5px auto 5px 0px;
+    padding-left: 25px;
+    
+  }
+  
+  .container button {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
