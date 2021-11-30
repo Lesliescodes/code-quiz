@@ -42,7 +42,7 @@ function startGame() {
         document.getElementById('time').textContent = time;
 
         //if statemtn to check if time is at 0 goes here
-        if(time <=0){
+        if (time <= 0) {
             gameOver()
         }
     }, 1000);
@@ -61,7 +61,7 @@ function showQuestion() {
     for (let i = 0; i < theQuestion.possibles.length; i++) {
         var choiceButton = document.createElement('button')
         choiceButton.textContent = theQuestion.possibles[i]
-        choiceButton.setAttribute('value', theQuestion.possibles[i]);
+        choiceButton.setAttribute('Answer', theQuestion.possibles[i]);
         // add a class so that you can make event listener later
         choiceButton.addEventListener("click", handleResponse);
         choices.appendChild(choiceButton);
@@ -71,21 +71,20 @@ function showQuestion() {
 
 function handleResponse() {
     // var response = event.target.textContent;
-    if (this.value !== javaScriptQuestions[currentQuestion].answer) {
+    if (this.value === javaScriptQuestions[currentQuestion].answer) {
         time -= 15
         document.getElementById('time').textContent = time;
     }
-
-
+    
     currentQuestion++
-    if (currentQuestion === javaScriptQuestions.length ) {
+    if (currentQuestion === javaScriptQuestions.length) {
         gameOver()
     } else {
         showQuestion();
     }
 }
 
-function gameOver(){
+function gameOver() {
     clearInterval(timer);
 
     document.getElementById('divContainer').setAttribute('class', 'hide');
@@ -95,33 +94,43 @@ function gameOver(){
 
 }
 
-function submitFinalScore(){
+function submitFinalScore() {
     //check local storage for any highscore data if data doesnt exist return empty array
-    var highScores = JSON.parse(localStorage.getItem('highscores')) || []
+    var submitScores = JSON.parse(localStorage.getItem('highscores')) || [];
 
     //grab initials
-   var initials=document.getElementById('inputInitial').value
+    var initials = document.getElementById('inputInitial').value
     //create new obj to save intials and score
-var newScore= {
- initials: initials,
- score: time
-}
+    var newScore = {
+        initials: initials,
+        score: time
+    }
     //push obj into array
-    newScore 
+    submitScores.push(newScore);
+    window.localStorage.setItem("highScores", JSON.stringify(highScores));
+    window.location.href = "/code-quiz/highscore.html"
     //save array to local Storage
 }
 
+function viewHighScores() {
+    var scores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+    var sortedScores = scores.sort(function (a, b) { return b.score - a.score });
 
+    sortedScores.forEach(function (score) {
+        var item = document.createElement("li")
+        item.textContent = score.initials + " - " + score.score;
+        var list = document.getElementById("highScores");
+        list.appendChild(item);
+    });
+    document.getElementById('submit').addEventListener("click", submitFinalScore);
+}
+function clearcache() {  //clear local storage //https://www.w3schools.com/jsref/met_storage_clear.asp
+    window.localStorage.clear();
+    window.location.reload(); // refreshes page with no list!
+}
 
-// Function opperations.
-// -Show me Question
-// -Select the answer
-// -Show next question/function
-// -Show done screen
-
-
-
+// document.getElementById("clear").onclick = (clearcache);
 
 document.getElementById('start').addEventListener("click", startGame);
-
+document.getElementById('submit').addEventListener("click", submitFinalScore);
 
